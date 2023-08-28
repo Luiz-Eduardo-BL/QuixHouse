@@ -6,6 +6,9 @@ Este repositório contém o projeto QuixHouse, uma aplicação mobile desenvolvi
 
 O QuixHouse é uma aplicação mobile voltada para alunos de Quixadá, que tem como objetivo facilitar a busca por aluguéis de casas e apartamentos. A aplicação permite que os usuários anunciem vagas em seus imóveis e também encontrem opções disponíveis para aluguel. Através do aplicativo, é possível centralizar informações importantes, como localização, preço, disponibilidade de quartos e fotos dos imóveis.
 
+## Guia de Commits
+
+Por favor, siga nosso [Guia de Commits](COMMIT_GUIDE.md) para manter um padrão consistente ao fazer commits neste projeto.
 ## Equipe
 
 - [Luiz Eduardo Borges de Lima](https://github.com/Luiz-Eduardo-BL)
