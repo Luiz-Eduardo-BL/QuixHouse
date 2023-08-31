@@ -9,6 +9,7 @@ O QuixHouse é uma aplicação mobile voltada para alunos de Quixadá, que tem c
 ## Guia de Commits
 
 Por favor, siga nosso [Guia de Commits](COMMIT_GUIDE.md) para manter um padrão consistente ao fazer commits neste projeto.
+
 ## Equipe
 
 - [Luiz Eduardo Borges de Lima](https://github.com/Luiz-Eduardo-BL)
@@ -51,6 +52,12 @@ Wireframes são protótipos de baixo nível que servem para visualizar e planeja
 
 Você também pode baixar o arquivo `.bmpr` do Balsamiq clicando [aqui](/Wireframe/WireFrame%20Mobile.bmpr).
 
+## Prototipo de Alto Nivel
+
+Protótipos de alto nível são representações mais detalhadas e próximas do visual final do aplicativo. Eles ajudam a ter uma ideia mais clara do design e da experiência do usuário. Veja abaixo o protótipo de alto nível do QuixHouse:
+
+![Prototipo de Alto Nivel](/Wireframe/PrototipoAltoNivel.png)
+
 
 ## Como Contribuir
 
@@ -59,6 +66,8 @@ Você também pode baixar o arquivo `.bmpr` do Balsamiq clicando [aqui](/Wirefra
 3. Faça as alterações necessárias e commit (`git commit -m 'Adicionando nova funcionalidade'`).
 4. Faça um push para o branch (`git push origin minha-nova-funcionalidade`).
 5. Crie um novo Pull Request.
+
+Certifique-se de seguir nosso [Guia de Commits](COMMIT_GUIDE.md) para manter um padrão consistente ao fazer commits neste projeto.
 
 ---
 © 2023 [Luiz Eduardo](https://github.com/Luiz-Eduardo-BL) & [Hugo Santos](https://github.com/hugosantosbessa)
