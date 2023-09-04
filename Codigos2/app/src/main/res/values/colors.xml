@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="linkColor">#007bff</color>
+    <color name="cinzaEscuro">#545F71</color>
+
+</resources>
