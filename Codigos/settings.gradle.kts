@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "QuixHouse"
 include(":app")
+ 

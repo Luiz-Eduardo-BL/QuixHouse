@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "25387134066",
-    "project_id": "testequixhouse",
-    "storage_bucket": "testequixhouse.appspot.com"
+    "project_number": "46548202526",
+    "project_id": "quixhouse-ec194",
+    "storage_bucket": "quixhouse-ec194.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:25387134066:android:f95bed2a67a8560302a6eb",
+        "mobilesdk_app_id": "1:46548202526:android:3a0ddef3a8c7af219f6a0f",
         "android_client_info": {
           "package_name": "com.example.quixhouse"
         }
       },
       "oauth_client": [
         {
-          "client_id": "25387134066-53d0vhpbr6need61rk0mjr3ajoc8m2o1.apps.googleusercontent.com",
+          "client_id": "46548202526-83tqm0eb773725kummhb3sqscn4jtpdl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCOqV8Gs91CZ3FNSUvk1fhNTXMxFWTDa_g"
+          "current_key": "AIzaSyC3utn40AaIl_Nmbtmz_usRHkEPo7tEvzY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "25387134066-53d0vhpbr6need61rk0mjr3ajoc8m2o1.apps.googleusercontent.com",
+              "client_id": "46548202526-83tqm0eb773725kummhb3sqscn4jtpdl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
