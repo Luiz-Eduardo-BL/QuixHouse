@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".auth.LoginFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Bem Vindo!!"
             android:textSize="24dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,15 +37,14 @@
             <TextView
                 android:id="@+id/linkCreateAccount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginLeft="10dp"
                 android:clickable="true"
                 android:onClick="onLinkButtonClick"
                 android:text="Clique aqui"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/black"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -58,37 +57,43 @@
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bg_edit"
             android:hint="email@email.com"
-            android:inputType="text"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"/>
+            android:inputType="textEmailAddress"
+            android:padding="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
-            android:layout_marginTop="8dp"/>
-
-
-        <EditText
-            android:id="@+id/editPassword"
             android:layout_marginTop="8dp"
+            android:text="Password" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit"
-            android:hint="*******"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edit"
+                android:inputType="textPassword"
+                android:padding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
         android:gravity="bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <Button
             android:id="@+id/buttonLogin"
@@ -96,8 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/bg_button"
-            app:backgroundTint="@null"
-            android:text="Log In" />
+            android:text="Log In"
+            app:backgroundTint="@null" />
 
         <TextView
             android:id="@+id/linkRecoverPassword"
