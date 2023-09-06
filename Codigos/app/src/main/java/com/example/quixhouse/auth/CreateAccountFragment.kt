@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quixhouse.R
 import com.example.quixhouse.databinding.FragmentCreateAccountBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class CreateAccountFragment : Fragment() {
@@ -39,9 +40,10 @@ class CreateAccountFragment : Fragment() {
 
     private fun initClicks() {
         binding.buttonCadastro.setOnClickListener {
+            val username = binding.editUserName.text.toString().trim()
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editPassword.text.toString().trim()
-            registerUser(email, password)
+            registerUser(username, email, password)
         }
         binding.linkLogin.setOnClickListener {
             findNavController().navigate(R.id.action_createAccountFragment_to_loginFragment)
@@ -52,10 +54,11 @@ class CreateAccountFragment : Fragment() {
 
 
 
-    private fun registerUser(email : String, password : String) {
-        if (validateData(email, password)) {
+    private fun registerUser(username: String, email : String, password : String) {
+        if (validateData(username, email, password)) {
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
+                    saveUsernameToDatabase(username)
                     findNavController().navigate(R.id.action_createAccountFragment_to_feedActivity)
                     Toast.makeText(requireContext(),"Conta cadastrada com sucesso", Toast.LENGTH_SHORT).show()
                 } else {
@@ -65,16 +68,33 @@ class CreateAccountFragment : Fragment() {
         }
     }
 
-    private fun validateData(email : String, password : String): Boolean {
-        return if (email.isNotEmpty()) {
-            if (password.isNotEmpty()) {
-                true
+    private fun saveUsernameToDatabase(username: String) {
+        val userId = auth.currentUser?.uid
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users")
+
+        userId?.let {
+            val user = HashMap<String, Any>()
+            user["username"] = username
+            usersRef.child(it).setValue(user)
+        }
+    }
+
+    private fun validateData(username: String, email : String, password : String): Boolean {
+        return if (username.isNotEmpty()) {
+            if (email.isNotEmpty()) {
+                if (password.isNotEmpty()) {
+                    true
+                } else {
+                    Toast.makeText(requireContext(), "Preencha a senha", Toast.LENGTH_SHORT).show()
+                    false
+                }
             } else {
-                Toast.makeText(requireContext(), "Preencha a senha", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Preencha o email", Toast.LENGTH_SHORT).show()
                 false
             }
         } else {
-            Toast.makeText(requireContext(), "Preencha o email", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Preencha o nome", Toast.LENGTH_SHORT).show()
             false
         }
     }
