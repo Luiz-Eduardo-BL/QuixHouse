@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quixhouse.adapter.AdpterPost
 import com.example.quixhouse.databinding.FragmentHomeBinding
@@ -51,6 +52,8 @@ class HomeFragment : Fragment() {
             Post(R.drawable.quarto_5,"Vaga: Feminina\nTipo: Apartamento"),
             Post(R.drawable.quarto_6,"Vaga: Feminina\nTipo: Apartamento")
         ))
+
+        initClicks()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -61,6 +64,7 @@ class HomeFragment : Fragment() {
             }
             R.id.menu_home_perfil -> {
                 Toast.makeText(requireContext(), "Perfil", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_home_to_perfilFragment)
                 true
             }
             R.id.menu_home_settings -> {
@@ -77,9 +81,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun initClicks() {
-
-
-
 
     }
 
