@@ -33,7 +33,8 @@ class PerfilFragment : Fragment() {
             findNavController().navigate(R.id.action_perfilFragment_to_changeEmailFragment)
         }
         binding.btnEditName.setOnClickListener {
-            findNavController().navigate(R.id.action_perfilFragment_to_changeNameFragment)
+            findNavController().navigate(R.id.action_perfilFragment_to_updateProfileActivity
+            )
         }
         binding.btnEditPassword.setOnClickListener {
             findNavController().navigate(R.id.action_perfilFragment_to_changePasswordFragment)

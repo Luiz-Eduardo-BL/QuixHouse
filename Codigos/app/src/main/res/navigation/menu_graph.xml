@@ -33,14 +33,14 @@
             android:id="@+id/action_perfilFragment_to_changeEmailFragment"
             app:destination="@id/changeEmailFragment" />
         <action
-            android:id="@+id/action_perfilFragment_to_changeNameFragment"
-            app:destination="@id/changeNameFragment" />
-        <action
             android:id="@+id/action_perfilFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_perfilFragment_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_perfilFragment_to_updateProfileActivity"
+            app:destination="@id/updateProfileActivity" />
     </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
@@ -52,15 +52,6 @@
             app:destination="@id/perfilFragment" />
     </fragment>
     <fragment
-        android:id="@+id/changeNameFragment"
-        android:name="com.example.quixhouse.ChangeNameFragment"
-        android:label="fragment_change_name"
-        tools:layout="@layout/fragment_change_name" >
-        <action
-            android:id="@+id/action_changeNameFragment_to_perfilFragment"
-            app:destination="@id/perfilFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.quixhouse.ChangePasswordFragment"
         android:label="fragment_change_password"
@@ -69,4 +60,9 @@
             android:id="@+id/action_changePasswordFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
     </fragment>
+    <activity
+        android:id="@+id/updateProfileActivity"
+        android:name="com.example.quixhouse.UpdateProfileActivity"
+        android:label="activity_update_profile"
+        tools:layout="@layout/activity_update_profile" />
 </navigation>
