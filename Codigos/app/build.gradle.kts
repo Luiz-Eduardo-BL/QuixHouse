@@ -65,4 +65,8 @@ dependencies {
     // Adicionado a dependencia do glide.
     implementation("com.github.bumptech.glide:glide:4.12.0")
 
+    // Adicionado a dependencia do image-cropper.
+    implementation ("com.theartofdev.edmodo:android-image-cropper:2.8.+")
+
+
 }
