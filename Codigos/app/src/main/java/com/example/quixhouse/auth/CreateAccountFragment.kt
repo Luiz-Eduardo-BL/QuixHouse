@@ -52,8 +52,6 @@ class CreateAccountFragment : Fragment() {
 
     }
 
-
-
     private fun registerUser(username: String, email : String, password : String) {
         if (validateData(username, email, password)) {
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
@@ -69,15 +67,13 @@ class CreateAccountFragment : Fragment() {
     }
 
     private fun saveUsernameToDatabase(username: String) {
-        val userId = auth.currentUser?.uid
-        val database = FirebaseDatabase.getInstance()
-        val usersRef = database.getReference("users")
-
-        userId?.let {
-            val user = HashMap<String, Any>()
-            user["username"] = username
-            usersRef.child(it).setValue(user)
-        }
+        val user = FirebaseAuth.getInstance().currentUser
+        val database = FirebaseDatabase.getInstance().reference
+        val uid = user?.uid
+        val userName = database.child("users").child(uid.toString()).child("username")
+        val email = database.child("users").child(uid.toString()).child("email")
+        userName.setValue(username)
+        email.setValue(user?.email)
     }
 
     private fun validateData(username: String, email : String, password : String): Boolean {
