@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_home_to_perfilFragment"
             app:destination="@id/perfilFragment" />
+        <action
+            android:id="@+id/action_home_to_postFragment"
+            app:destination="@id/postFragment" />
+        <action
+            android:id="@+id/action_home_to_addPostActivity"
+            app:destination="@id/addPostActivity" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -31,16 +37,19 @@
         tools:layout="@layout/fragment_perfil" >
         <action
             android:id="@+id/action_perfilFragment_to_changeEmailFragment"
-            app:destination="@id/changeEmailFragment" />
-        <action
-            android:id="@+id/action_perfilFragment_to_changeNameFragment"
-            app:destination="@id/changeNameFragment" />
+            app:destination="@id/changeEmailFragment"
+            app:popUpTo="@id/perfilFragment"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@+id/action_perfilFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_perfilFragment_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_perfilFragment_to_changeNameFragment"
+            app:destination="@id/changeNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
@@ -49,16 +58,9 @@
         tools:layout="@layout/fragment_change_email" >
         <action
             android:id="@+id/action_changeEmailFragment_to_perfilFragment"
-            app:destination="@id/perfilFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/changeNameFragment"
-        android:name="com.example.quixhouse.ChangeNameFragment"
-        android:label="fragment_change_name"
-        tools:layout="@layout/fragment_change_name" >
-        <action
-            android:id="@+id/action_changeNameFragment_to_perfilFragment"
-            app:destination="@id/perfilFragment" />
+            app:destination="@id/perfilFragment"
+            app:popUpTo="@id/changeEmailFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -69,4 +71,27 @@
             android:id="@+id/action_changePasswordFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.quixhouse.PostFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_home"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeNameFragment"
+        android:name="com.example.quixhouse.ChangeNameFragment"
+        android:label="fragment_change_name"
+        tools:layout="@layout/fragment_change_name" >
+        <action
+            android:id="@+id/action_changeNameFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/addPostActivity"
+        android:name="com.example.quixhouse.AddPostActivity"
+        android:label="activity_add_post"
+        tools:layout="@layout/activity_add_post" />
 </navigation>

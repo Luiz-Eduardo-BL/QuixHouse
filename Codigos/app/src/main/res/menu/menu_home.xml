@@ -9,16 +9,18 @@
 
 
     <item
+        android:id="@+id/menu_home_add_post"
+        android:icon="@drawable/ic_add"
+        android:title="Settings"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_home_perfil"
         android:icon="@drawable/baseline_person_24"
         android:title="Search"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/menu_home_settings"
-        android:icon="@drawable/baseline_settings_24"
-        android:title="Settings"
-        app:showAsAction="always" />
+
 
 
 

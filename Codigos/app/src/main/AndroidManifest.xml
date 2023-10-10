@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="33" />
@@ -31,6 +31,12 @@
         android:theme="@style/Theme.QuixHouse"
         tools:targetApi="31">
         <activity
+            android:name=".AddPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CropPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -43,7 +49,13 @@
             android:name=".FeedActivity"
             android:exported="false"
             android:label="@string/title_activity_feed" />
+        <activity
+            android:name="com.soundcloud.android.crop.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/my_map_api_key" />
     </application>
 
 </manifest>

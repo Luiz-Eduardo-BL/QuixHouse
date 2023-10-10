@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -65,5 +66,11 @@ dependencies {
     // Adicionado a dependencia do glide.
     implementation("com.github.bumptech.glide:glide:4.12.0")
 
+    // Adicionado a dependencia do SDK Google Maps
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
+    // Adicionado a dependencia do image-cropper.
+    implementation("io.coil-kt:coil:0.13.0")
+    implementation("com.soundcloud.android:android-crop:1.0.1@aar")
 }

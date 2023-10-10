@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.quixhouse.adapter.AdpterPost
+import com.example.quixhouse.adapter.AdapterPost
 import com.example.quixhouse.databinding.FragmentHomeBinding
 import com.example.quixhouse.model.Post
 
@@ -35,25 +35,32 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        initAdapter()
+        initClicks()
+    }
+
+    private fun initAdapter() {
         val recyclerViewPosts = binding.recyclerViewPosts
         recyclerViewPosts.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerViewPosts.setHasFixedSize(true)
         // Configurar adpter
         val listPosts: MutableList<Post> = mutableListOf()
-        val adapterPost = AdpterPost(requireContext(), listPosts)
+        val adapterPost = AdapterPost(requireContext(), listPosts)
+        adapterPost.setOnItemClickListener(object : AdapterPost.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                // Lidar com o evento de clique do item aqui
+                findNavController().navigate(R.id.action_home_to_postFragment)
+            }
+        })
         recyclerViewPosts.adapter = adapterPost
 
-        listPosts.addAll(listOf(
-            Post(R.drawable.quarto_1,"Vaga: Feminina\nTipo: Apartamento"),
-            Post(R.drawable.quarto_2,"Vaga: Masculino\nTipo: Apartamento"),
-            Post(R.drawable.quarto_3,"Vaga: Feminina\nTipo: Apartamento"),
-            Post(R.drawable.quarto_4,"Vaga: Feminina\nTipo: Apartamento"),
-            Post(R.drawable.quarto_5,"Vaga: Feminina\nTipo: Apartamento"),
-            Post(R.drawable.quarto_6,"Vaga: Feminina\nTipo: Apartamento")
-        ))
+        listPosts.add(Post("", "","Apenas Teste"))
+    }
 
-        initClicks()
+    private fun initClicks() {
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -67,8 +74,9 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_home_to_perfilFragment)
                 true
             }
-            R.id.menu_home_settings -> {
+            R.id.menu_home_add_post -> {
                 Toast.makeText(requireContext(), "Settings", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_home_to_addPostActivity)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -80,8 +88,6 @@ class HomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun initClicks() {
 
-    }
 
 }

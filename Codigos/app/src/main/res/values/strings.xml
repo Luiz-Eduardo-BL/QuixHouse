@@ -4,6 +4,17 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--    Key Google Maps -->
+    <string name="my_map_api_key">AIzaSyDpW5NKIMTepLNd_H3AmNk9Yzq2hYmDwbk</string>
+
+    <!--    Erros Firebase Authentication-->
+    <string name="account_not_registered_register_fragment">Nenhuma conta encontrada com este e-mail.</string>
+    <string name="invalid_email_register_fragment">Insira um e-mail válido.</string>
+    <string name="invalid_password_register_fragment">Senha inválida, tente novamente.</string>
+    <string name="email_in_use_register_fragment">Este e-mail já está em uso.</string>
+    <string name="strong_password_register_fragment">Insira uma senha mais forte.</string>
+    <string name="error_generic">Ocorreu um erro, por favor tente novamente mais tarde.</string>
 </resources>
