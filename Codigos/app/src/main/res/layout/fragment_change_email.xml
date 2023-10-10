@@ -49,12 +49,12 @@
             android:text="Email" />
 
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/editNewEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_edit"
-            android:hint="email@email.com"
+            android:hint=" "
             android:inputType="textEmailAddress"
             android:padding="10dp" />
 
@@ -87,7 +87,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="300dp"
             android:background="@drawable/bg_button"
-            android:text="Salvar"
+            android:text="Atualizar"
             app:backgroundTint="@null" />
 
     </LinearLayout>

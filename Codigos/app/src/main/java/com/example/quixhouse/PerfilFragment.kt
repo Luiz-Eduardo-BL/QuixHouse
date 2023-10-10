@@ -28,8 +28,11 @@ import kotlinx.coroutines.selects.select
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.UUID
+import android.content.DialogInterface
+import android.app.AlertDialog
+import android.widget.Button
 
-private var _binding: FragmentPerfilBinding? = null
+var _binding: FragmentPerfilBinding? = null
 private val binding get() = _binding!!
 
 class PerfilFragment : Fragment() {
@@ -50,6 +53,7 @@ class PerfilFragment : Fragment() {
         checkProfilePhoto()
         initClicks()
         setupImageClickListener()
+
     }
 
     private fun setupImageClickListener() {
@@ -172,6 +176,28 @@ class PerfilFragment : Fragment() {
     }
 
 
+    private fun showDeleteConfirmationDialog() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val uid = user?.uid
+        val database = FirebaseDatabase.getInstance().reference
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Deletar conta")
+        builder.setMessage("Tem certeza que deseja deletar sua conta?")
+        builder.setPositiveButton("Sim") { dialogInterface: DialogInterface, i: Int ->
+            user?.delete()?.addOnSuccessListener {
+                database.child("users").child(uid.toString()).removeValue()
+                Toast.makeText(context, "Conta deletada com sucesso", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_createAccountFragment_to_loginFragment)
+            }?.addOnFailureListener {
+                Toast.makeText(context, "Erro ao deletar conta", Toast.LENGTH_SHORT).show()
+            }
+        }
+        builder.setNegativeButton("Não") { dialogInterface: DialogInterface, i: Int ->
+            Toast.makeText(context, "Conta não deletada", Toast.LENGTH_SHORT).show()
+        }
+        builder.show() 
+    }
+
     private fun initClicks() {
         binding.backButton.setOnClickListener {
             findNavController().navigate(R.id.action_perfilFragment_to_home)
@@ -184,6 +210,9 @@ class PerfilFragment : Fragment() {
         }
         binding.btnEditPassword.setOnClickListener {
             findNavController().navigate(R.id.action_perfilFragment_to_changePasswordFragment)
+        }
+        binding.btnDeletePerfil.setOnClickListener {
+            showDeleteConfirmationDialog()
         }
     }
 }

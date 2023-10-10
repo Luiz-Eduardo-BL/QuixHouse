@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_edit"
-            android:hint="name"
+            android:hint=" "
             android:inputType="text"
             android:padding="10dp" />
 
@@ -86,7 +86,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="300dp"
             android:background="@drawable/bg_button"
-            android:text="Salvar"
+            android:text="Atualizar"
             app:backgroundTint="@null" />
 
     </LinearLayout>
