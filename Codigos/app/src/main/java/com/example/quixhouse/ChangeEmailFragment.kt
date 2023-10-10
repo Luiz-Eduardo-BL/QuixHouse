@@ -13,6 +13,6 @@ class ChangeEmailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_password, container, false)
+        return inflater.inflate(R.layout.fragment_change_email, container, false)
     }
 }
