@@ -47,27 +47,31 @@ class PerfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getPermission()
         checkProfilePhoto()
         initClicks()
+        setupImageClickListener()
+    }
+
+    private fun setupImageClickListener() {
+        binding.profileImageView.setOnClickListener {
+            checkPermissionAndChooseImage()
+        }
     }
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
         if (isGranted) {
-            chooseImage()
+            chooseImageGallery()
         } else {
             Toast.makeText(context, "Permissão necessária para acessar a câmera/galeria", Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun checkPermission() {
+    private fun checkPermissionAndChooseImage() {
         when {
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
-                chooseImage()
+                chooseImageGallery()
             }
             shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
-                getPermission()
-                Toast.makeText(context, "Permissão necessária para acessar a câmera/galeria", Toast.LENGTH_SHORT).show()
                 requestPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
             else -> {
@@ -82,12 +86,6 @@ class PerfilFragment : Fragment() {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 102)
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 103)
         }
-    }
-
-    private fun chooseImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, 0)
     }
 
     fun uploadImage() {
@@ -124,14 +122,13 @@ class PerfilFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //cortar imagem com o image cropper e salvar no imageUri
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
-            val imageUri = data.data
-            val intent = Intent(context, ImageCropperActivity::class.java)
-            intent.putExtra("imageUri", imageUri.toString())
-            startActivity(intent)
+            imageUri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, imageUri)
+            binding.profileImageView.setImageBitmap(bitmap)
+            uploadImage()
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onStart() {
