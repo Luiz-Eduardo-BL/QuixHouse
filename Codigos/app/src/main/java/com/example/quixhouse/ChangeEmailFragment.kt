@@ -15,5 +15,4 @@ class ChangeEmailFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_change_password, container, false)
     }
-
 }

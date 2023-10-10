@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="O nome de cer válido e deve ser inserido a senha atual para salvar a alteração"
+            android:text="O nome deve ser válido e deve ser inserido a senha atual para salvar a alteração"
             android:textSize="18sp" />
 
         <TextView
@@ -48,13 +48,13 @@
             android:text="Nome" />
 
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/editUserName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_edit"
-            android:hint="email@email.com"
-            android:inputType="textEmailAddress"
+            android:hint="name"
+            android:inputType="text"
             android:padding="10dp" />
 
         <TextView
