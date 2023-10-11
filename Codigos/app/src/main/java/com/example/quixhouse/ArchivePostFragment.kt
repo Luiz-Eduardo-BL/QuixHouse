@@ -1,59 +1,82 @@
 package com.example.quixhouse
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.quixhouse.adapter.AdapterPost
+import com.example.quixhouse.databinding.FragmentArchivePostBinding
+import com.example.quixhouse.helper.FirebaseHelper
+import com.example.quixhouse.model.Post
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ArchivePostFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ArchivePostFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentArchivePostBinding? = null
+    private val binding get() = _binding!!
 
+    private val postList = mutableListOf<Post>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_archive_post, container, false)
+        _binding = FragmentArchivePostBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ArchivePostFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ArchivePostFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getPosts()
     }
+
+    private fun initAdapter() {
+        val recyclerViewPosts = binding.recyclerViewPosts
+        recyclerViewPosts.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerViewPosts.setHasFixedSize(true)
+        // Configurar adpter
+        val adapterPost = AdapterPost(requireContext(), postList)
+        adapterPost.setOnItemClickListener(object : AdapterPost.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                // Lidar com o evento de clique do item aqui
+                val intent = Intent(requireContext(), EditPostActivity::class.java)
+                intent.putExtra("post_data", postList[position])
+                requireContext().startActivity(intent)
+            }
+        })
+        recyclerViewPosts.adapter = adapterPost
+    }
+
+    private fun getPosts() {
+        FirebaseHelper
+            .getDatabase()
+            .child("posts")
+            .child(FirebaseHelper.getIdUser() ?: "")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    postList.clear()
+                    if (snapshot.exists()) {
+                        for (snap in snapshot.children) {
+                            val post = snap.getValue(Post::class.java) as Post
+                            postList.add(post)
+                        }
+                        postList.reverse()
+                        initAdapter()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
+
+
 }

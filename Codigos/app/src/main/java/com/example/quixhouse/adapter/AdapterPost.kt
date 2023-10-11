@@ -1,6 +1,5 @@
 package com.example.quixhouse.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.quixhouse.PostActivity
 import com.example.quixhouse.R
 import com.example.quixhouse.model.Post
 
@@ -60,11 +58,11 @@ class AdapterPost(private val context: android.content.Context, private val post
                 .diskCacheStrategy(DiskCacheStrategy.ALL)) // Estratégia de armazenamento em cache
             .into(holder.image)
 
-        holder.image.setOnClickListener {
-            val intent = Intent(context, PostActivity::class.java)
-            intent.putExtra("post_data", post)
-            context.startActivity(intent)
-        }
+//        holder.image.setOnClickListener {
+//            val intent = Intent(context, PostActivity::class.java)
+//            intent.putExtra("post_data", post)
+//            context.startActivity(intent)
+//        }
 
     }
 }

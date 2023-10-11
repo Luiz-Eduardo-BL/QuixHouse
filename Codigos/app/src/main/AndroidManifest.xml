@@ -31,6 +31,9 @@
         android:theme="@style/Theme.QuixHouse"
         tools:targetApi="31">
         <activity
+            android:name=".EditPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".PostActivity"
             android:exported="false" />
         <activity

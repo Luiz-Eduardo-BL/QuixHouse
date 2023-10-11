@@ -1,5 +1,6 @@
 package com.example.quixhouse
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -30,58 +31,58 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        initClicks()
         getPosts()
     }
 
     private fun initAdapter() {
         val recyclerViewPosts = binding.recyclerViewPosts
-        recyclerViewPosts.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerViewPosts.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerViewPosts.setHasFixedSize(true)
         // Configurar adpter
         val adapterPost = AdapterPost(requireContext(), postList)
-//        adapterPost.setOnItemClickListener(object : AdapterPost.OnItemClickListener {
-//            override fun onItemClick(position: Int) {
-//                findNavController().navigate(R.id.action_home_to_postFragment)
-//            }
-//        })
+        adapterPost.setOnItemClickListener(object : AdapterPost.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                // Lidar com o evento de clique do item aqui
+                val intent = Intent(requireContext(), PostActivity::class.java)
+                intent.putExtra("post_data", postList[position])
+                requireContext().startActivity(intent)
+            }
+        })
         recyclerViewPosts.adapter = adapterPost
-    }
-
-    private fun initClicks() {
-
     }
 
     private fun getPosts() {
         FirebaseHelper
             .getDatabase()
             .child("posts")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     postList.clear()
-                    if(snapshot.exists()) {
+                    if (snapshot.exists()) {
                         for (snap in snapshot.children) {
-                            for(data in snap.children) {
+                            for (data in snap.children) {
                                 val post = data.getValue(Post::class.java) as Post
                                 postList.add(post)
-                                initAdapter()
                             }
                         }
-
+                        postList.reverse()
+                        initAdapter()
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
                 }
@@ -95,11 +96,13 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
                 true
             }
+
             R.id.menu_home_perfil -> {
                 Toast.makeText(requireContext(), "Perfil", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_home_to_perfilFragment)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -108,7 +111,5 @@ class HomeFragment : Fragment() {
         inflater.inflate(R.menu.menu_home, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
-
 
 }
