@@ -2,18 +2,23 @@ package com.example.quixhouse
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.example.quixhouse.databinding.ActivityPostBinding
+import com.example.quixhouse.model.Post
+import com.example.quixhouse.utils.PermissionUtils
+import com.example.quixhouse.utils.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.example.quixhouse.utils.PermissionUtils.isPermissionGranted
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener
@@ -21,45 +26,52 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 
-
-class PostFragment : Fragment(), OnMyLocationButtonClickListener,
+/**
+ * This demo shows how GMS Location can be used to check for changes to the users location.  The
+ * "My Location" button uses GMS Location to set the blue dot representing the users location.
+ * Permission for [Manifest.permission.ACCESS_FINE_LOCATION] and [Manifest.permission.ACCESS_COARSE_LOCATION]
+ * are requested at run time. If either permission is not granted, the Activity is finished with an error message.
+ */
+class PostActivity : AppCompatActivity(),
+    OnMyLocationButtonClickListener,
     OnMyLocationClickListener, OnMapReadyCallback,
     OnRequestPermissionsResultCallback {
 
+    private lateinit var binding: ActivityPostBinding
     /**
      * Flag indicating whether a requested permission has been denied after returning in
      * [.onRequestPermissionsResult].
      */
     private var permissionDenied = false
-    val FINE_PERMISSION_CODE = 1
     private lateinit var map: GoogleMap
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityPostBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val mapFragment =
+            supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_post, container, false)
+        val post = intent.getParcelableExtra("post_data", Post::class.java)
 
-        // Obtenha o SupportMapFragment
-        val mapFragment = childFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-
-        // Inicialize o mapa assincronamente
-        mapFragment.getMapAsync(this)
-
-        return rootView
+        if (post != null) {
+            binding.descriptionPost.text = post.description
+            Glide.with(this)
+                .load(post.image)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.ic_image_default) // Imagem de placeholder, se desejar
+                        .error(R.drawable.ic_image_not_supported) // Imagem de erro, se desejar
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)) // Estratégia de armazenamento em cache
+                .into(binding.imagePost)
+        }
     }
+
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        mMap.addMarker(
-//            MarkerOptions()
-//                .position(sydney)
-//                .title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         googleMap.setOnMyLocationButtonClickListener(this)
         googleMap.setOnMyLocationClickListener(this)
         enableMyLocation()
@@ -74,10 +86,10 @@ class PostFragment : Fragment(), OnMyLocationButtonClickListener,
         // [START maps_check_location_permission]
         // 1. Check if permissions are granted, if so, enable the my location layer
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
+                this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                requireContext(),
+                this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
@@ -87,19 +99,22 @@ class PostFragment : Fragment(), OnMyLocationButtonClickListener,
 
         // 2. If if a permission rationale dialog should be shown
         if (ActivityCompat.shouldShowRequestPermissionRationale(
-                requireContext() as Activity,
+                this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) || ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
+                this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         ) {
-
+            PermissionUtils.RationaleDialog.newInstance(
+                LOCATION_PERMISSION_REQUEST_CODE, true
+            ).show(supportFragmentManager, "dialog")
+            return
         }
 
         // 3. Otherwise, request permission
         ActivityCompat.requestPermissions(
-            requireActivity(),
+            this,
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -110,7 +125,7 @@ class PostFragment : Fragment(), OnMyLocationButtonClickListener,
     }
 
     override fun onMyLocationButtonClick(): Boolean {
-        Toast.makeText(requireContext(), "MyLocation button clicked", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT)
             .show()
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
@@ -118,13 +133,8 @@ class PostFragment : Fragment(), OnMyLocationButtonClickListener,
     }
 
     override fun onMyLocationClick(location: Location) {
-        val latitude = location.latitude
-        val longitude = location.longitude
-        Toast.makeText(
-            requireContext(),
-            "Current location: Lat $latitude, Long $longitude",
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, "Current location:\n$location", Toast.LENGTH_LONG)
+            .show()
     }
 
     // [START maps_check_location_permission_result]
@@ -163,6 +173,23 @@ class PostFragment : Fragment(), OnMyLocationButtonClickListener,
         }
     }
 
+    // [END maps_check_location_permission_result]
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        if (permissionDenied) {
+            // Permission was not granted, display error dialog.
+            showMissingPermissionError()
+            permissionDenied = false
+        }
+    }
+
+    /**
+     * Displays a dialog with error message explaining that the location permission is missing.
+     */
+    private fun showMissingPermissionError() {
+        newInstance(true).show(supportFragmentManager, "dialog")
+    }
+
     companion object {
         /**
          * Request code for location permission request.
@@ -171,5 +198,4 @@ class PostFragment : Fragment(), OnMyLocationButtonClickListener,
          */
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
-
 }

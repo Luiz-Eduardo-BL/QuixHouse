@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class Post(
     var id: String = "",
     var image: String = "",
-    var decription: String = ""
+    var description: String = ""
 ) : Parcelable {
     init {
         this.id = FirebaseHelper.getDatabase().push().key ?: ""

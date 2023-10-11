@@ -13,23 +13,7 @@
         <action
             android:id="@+id/action_home_to_perfilFragment"
             app:destination="@id/perfilFragment" />
-        <action
-            android:id="@+id/action_home_to_postFragment"
-            app:destination="@id/postFragment" />
-        <action
-            android:id="@+id/action_home_to_addPostActivity"
-            app:destination="@id/addPostActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/profile"
-        android:name="com.example.quixhouse.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/settings"
-        android:name="com.example.quixhouse.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/perfilFragment"
         android:name="com.example.quixhouse.PerfilFragment"
@@ -72,15 +56,6 @@
             app:destination="@id/perfilFragment" />
     </fragment>
     <fragment
-        android:id="@+id/postFragment"
-        android:name="com.example.quixhouse.PostFragment"
-        android:label="fragment_post"
-        tools:layout="@layout/fragment_post" >
-        <action
-            android:id="@+id/action_postFragment_to_home"
-            app:destination="@id/home" />
-    </fragment>
-    <fragment
         android:id="@+id/changeNameFragment"
         android:name="com.example.quixhouse.ChangeNameFragment"
         android:label="fragment_change_name"
@@ -89,9 +64,14 @@
             android:id="@+id/action_changeNameFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
     </fragment>
-    <activity
-        android:id="@+id/addPostActivity"
-        android:name="com.example.quixhouse.AddPostActivity"
-        android:label="activity_add_post"
-        tools:layout="@layout/activity_add_post" />
+    <fragment
+        android:id="@+id/addPost"
+        android:name="com.example.quixhouse.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/archivePost"
+        android:name="com.example.quixhouse.ArchivePostFragment"
+        android:label="fragment_archive_post"
+        tools:layout="@layout/fragment_archive_post" />
 </navigation>
