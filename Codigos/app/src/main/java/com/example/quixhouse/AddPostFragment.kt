@@ -34,17 +34,14 @@ class AddPostFragment : Fragment() {
     private var _binding: FragmentAddPostBinding? = null
     private val binding get() = _binding!!
     private lateinit var dialog: AlertDialog
-
-    private lateinit var post: Post
     private var _bitmap: Bitmap? = null
     private val bitmap get() = _bitmap!!
-
+    private lateinit var post: Post
     private var flagImage: Boolean = false
     companion object {
         @RequiresApi(Build.VERSION_CODES.TIRAMISU)
         private const val PERMISSAO_GALERIA = Manifest.permission.READ_MEDIA_IMAGES
     }
-
 
     private val requestGaleriaLauncher: ActivityResultLauncher<String> = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -144,7 +141,7 @@ class AddPostFragment : Fragment() {
         val description = binding.descriptionPost.text.toString().trim()
         if (description.isNotEmpty() && flagImage) {
             val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos)
             val data = baos.toByteArray()
             val uploadTask = storageRef.putBytes(data)
             uploadTask.addOnSuccessListener { _ ->

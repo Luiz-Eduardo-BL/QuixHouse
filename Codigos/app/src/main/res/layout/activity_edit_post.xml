@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/descriptionPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,34 +30,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagePost" />
 
-    <ImageButton
-        android:id="@+id/btnDeletePost"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="Voltar"
-        android:src="@drawable/ic_delete"
-        android:textSize="16sp"
-        android:layout_marginHorizontal="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_button"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Atualizar"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnEditPost"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionPost"
-        app:tint="@color/cinzaEscuro" />
-
-    <ImageButton
-        android:id="@+id/btnEditPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="Voltar"
-        android:layout_marginHorizontal="30dp"
-        android:src="@drawable/ic_edit"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeletePost"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionPost" />
 

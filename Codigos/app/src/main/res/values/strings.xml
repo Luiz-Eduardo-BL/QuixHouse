@@ -17,4 +17,5 @@
     <string name="email_in_use_register_fragment">Este e-mail já está em uso.</string>
     <string name="strong_password_register_fragment">Insira uma senha mais forte.</string>
     <string name="error_generic">Ocorreu um erro, por favor tente novamente mais tarde.</string>
+    <string name="text_post_update_sucess">Post Atualizado</string>
 </resources>

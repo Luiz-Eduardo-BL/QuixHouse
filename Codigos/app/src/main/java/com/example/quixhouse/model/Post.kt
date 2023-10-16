@@ -11,6 +11,7 @@ data class Post(
     var description: String = ""
 ) : Parcelable {
     init {
-        this.id = FirebaseHelper.getDatabase().push().key ?: ""
+        if(this.id == "")
+            this.id = FirebaseHelper.getDatabase().push().key ?: ""
     }
 }
