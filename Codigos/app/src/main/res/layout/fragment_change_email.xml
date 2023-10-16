@@ -5,47 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChangeEmailFragment">
-
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="Voltar"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="Voltar"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="60dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/backButton"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Alterar Email"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_gravity="center_vertical|center_horizontal">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginBottom="60dp"
+            android:layout_gravity="center_vertical|center_horizontal"
             android:fontFamily="sans-serif-condensed"
-            android:text="Alterar Email"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="O email deve ser valido e deve ser inserido a senha atual para salvar a alteração"
+            android:text="Adicione um novo email valido, você recebera um email de confirmação."
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
             android:text="Email" />
 
         <EditText
@@ -58,30 +69,9 @@
             android:inputType="textEmailAddress"
             android:padding="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Password"
-            android:textSize="18sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edit"
-                android:inputType="textPassword"
-                android:padding="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/buttonSend"
+            android:id="@+id/buttonSendEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

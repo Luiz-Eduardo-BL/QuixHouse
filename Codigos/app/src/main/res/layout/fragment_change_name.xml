@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="O nome deve ser válido e deve ser inserido a senha atual para salvar a alteração"
+            android:text="Adicionar um novo nome, você recebera um email de confirmação."
             android:textSize="18sp" />
 
         <TextView
@@ -56,28 +56,6 @@
             android:hint=" "
             android:inputType="text"
             android:padding="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Password"
-            android:textSize="18sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edit"
-                android:inputType="textPassword"
-                android:padding="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/buttonSend"
