@@ -63,8 +63,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     private fun initAdapter() {

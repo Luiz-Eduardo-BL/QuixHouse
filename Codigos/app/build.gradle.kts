@@ -70,6 +70,10 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
 
+    // Places SDK for Android
+    implementation("com.google.android.libraries.places:places:3.2.0")
+    implementation("com.google.maps.android:android-maps-utils:2.4.0")
+
     // Adicionado a dependencia do image-cropper.
     implementation("io.coil-kt:coil:0.13.0")
     implementation("com.soundcloud.android:android-crop:1.0.1@aar")

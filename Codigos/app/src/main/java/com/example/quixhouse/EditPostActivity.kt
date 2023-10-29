@@ -36,6 +36,7 @@ class EditPostActivity : AppCompatActivity() {
     private val bitmap get() = _bitmap!!
     private lateinit var post: Post
     private var flagImage: Boolean = false
+    private var imageAnt: String = ""
 
     companion object {
         @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -156,7 +157,8 @@ class EditPostActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 val uid = user?.uid
                 val imageId = UUID.randomUUID().toString()
-                val storageRef = FirebaseStorage.getInstance().reference.child("images/posts/$uid/$imageId")
+                val storageRef =
+                    FirebaseStorage.getInstance().reference.child("images/posts/$uid/$imageId")
                 val baos = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos)
                 val data = baos.toByteArray()
@@ -169,6 +171,7 @@ class EditPostActivity : AppCompatActivity() {
                     ).show()
                     storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
                         post.description = description
+                        imageAnt = post.image
                         post.image = downloadUri.toString()
                         updatePost()
                     }.addOnFailureListener { exception ->
@@ -185,8 +188,7 @@ class EditPostActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
-            else {
+            } else {
                 post.description = description
                 updatePost()
             }
@@ -197,6 +199,17 @@ class EditPostActivity : AppCompatActivity() {
     }
 
     private fun updatePost() {
+        if (flagImage) {
+            // Referência ao armazenamento Firebase
+            val imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageAnt)
+            // Exclui a imagem no Firebase Storage
+            imageRef.delete().addOnSuccessListener {
+            }.addOnFailureListener { exception ->
+                // A exclusão da imagem falhou
+                val errorMessage = exception.message ?: getString(R.string.error_generic)
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
         FirebaseHelper
             .getDatabase()
             .child("posts")

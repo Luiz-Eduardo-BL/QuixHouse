@@ -19,6 +19,7 @@ import com.example.quixhouse.model.Post
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 
 class ArchivePostFragment : Fragment() {
 
@@ -124,19 +125,28 @@ class ArchivePostFragment : Fragment() {
 
 
     private fun deletePost(post: Post) {
-        FirebaseHelper.getDatabase().child("posts").child(FirebaseHelper.getIdUser() ?: "")
-            .child(post.id).removeValue().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        requireContext(), R.string.text_post_update_sucess, Toast.LENGTH_SHORT
-                    ).show()
-                    postList.remove(post)
-                } else {
-                    Toast.makeText(
-                        requireContext(), R.string.error_generic, Toast.LENGTH_SHORT
-                    ).show()
+        // Referência ao armazenamento Firebase
+        val imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(post.image)
+        // Exclui a imagem no Firebase Storage
+        imageRef.delete().addOnSuccessListener {
+            FirebaseHelper.getDatabase().child("posts").child(FirebaseHelper.getIdUser() ?: "")
+                .child(post.id).removeValue().addOnCompleteListener { postTask ->
+                    if (postTask.isSuccessful) {
+                        Toast.makeText(
+                            requireContext(), R.string.text_post_update_sucess, Toast.LENGTH_SHORT
+                        ).show()
+                        postList.remove(post)
+                    } else {
+                        Toast.makeText(
+                            requireContext(), R.string.error_generic, Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }
+        }.addOnFailureListener { exception ->
+            // A exclusão da imagem falhou
+            val errorMessage = exception.message ?: getString(R.string.error_generic)
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {

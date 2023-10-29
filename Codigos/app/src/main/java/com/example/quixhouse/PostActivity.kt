@@ -2,8 +2,10 @@ package com.example.quixhouse
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -20,11 +22,14 @@ import com.example.quixhouse.model.Post
 import com.example.quixhouse.utils.PermissionUtils
 import com.example.quixhouse.utils.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.example.quixhouse.utils.PermissionUtils.isPermissionGranted
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 /**
  * This demo shows how GMS Location can be used to check for changes to the users location.  The
@@ -38,12 +43,17 @@ class PostActivity : AppCompatActivity(),
     OnRequestPermissionsResultCallback {
 
     private lateinit var binding: ActivityPostBinding
+    private var latLng: LatLng? = null
     /**
      * Flag indicating whether a requested permission has been denied after returning in
      * [.onRequestPermissionsResult].
      */
     private var permissionDenied = false
     private lateinit var map: GoogleMap
+    private val ZOOM_LEVEL = 20f
+
+    private lateinit var post: Post
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +63,7 @@ class PostActivity : AppCompatActivity(),
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        val post = intent.getParcelableExtra("post_data", Post::class.java)
+        post = intent.getParcelableExtra("post_data", Post::class.java)!!
 
         if (post != null) {
             binding.descriptionPost.text = post.description
@@ -63,18 +73,69 @@ class PostActivity : AppCompatActivity(),
                     RequestOptions()
                         .placeholder(R.drawable.ic_image_default) // Imagem de placeholder, se desejar
                         .error(R.drawable.ic_image_not_supported) // Imagem de erro, se desejar
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)) // Estratégia de armazenamento em cache
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                ) // Estratégia de armazenamento em cache
                 .into(binding.imagePost)
+
+            binding.addrPost.text = "${post.locationAddress.address}, ${post.locationAddress.neighborhood},  Nº ${post.locationAddress.numberAp}"
+            binding.cityEstatePost.text = "${post.locationAddress.city}  -  ${post.locationAddress.state}"
         }
+
+        initClicks()
+    }
+
+    private fun initClicks() {
+        binding.btnOpenMaps.setOnClickListener {
+            latLng?.let  {
+                val latitude = it.latitude
+                val longitude = it.longitude
+
+                // Cria uma Uri com as coordenadas do marcador
+//                val gmmIntentUri = Uri.parse("google.navigation:q=$latitude,$longitude")
+                val gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude")
+
+                // Cria uma intenção para abrir o Google Maps
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+
+                // Verifica se o Google Maps está instalado no dispositivo
+                if (mapIntent.resolveActivity(packageManager) != null) {
+                    startActivity(mapIntent) // Inicie a intenção
+                } else {
+                    Toast.makeText(
+                        this, "Google Maps não está instalado no seu dispositivo", Toast.LENGTH_SHORT
+                    ).show()                }
+            }
+        }
+
     }
 
 
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        googleMap.setOnMyLocationButtonClickListener(this)
-        googleMap.setOnMyLocationClickListener(this)
-        enableMyLocation()
+
+//        googleMap.setOnMyLocationButtonClickListener(this)
+//        googleMap.setOnMyLocationClickListener(this)
+//        enableMyLocation()
+        // Desabilita interações no mapa
+        map.uiSettings.isZoomControlsEnabled = false
+        map.uiSettings.isZoomGesturesEnabled = false
+        map.uiSettings.isScrollGesturesEnabled = false
+        map.uiSettings.isScrollGesturesEnabledDuringRotateOrZoom = false
+        map.uiSettings.isTiltGesturesEnabled = false
+        map.uiSettings.isRotateGesturesEnabled = false
+        latLng = post?.let {
+            LatLng(
+                it.locationAddress.latitude!!,
+                it.locationAddress.longitude!!
+            )
+        }
+        latLng?.let {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(it, ZOOM_LEVEL))
+            map.addMarker(MarkerOptions().position(it))
+        }
+
     }
 
     /**

@@ -8,7 +8,8 @@ import kotlinx.parcelize.Parcelize
 data class Post(
     var id: String = "",
     var image: String = "",
-    var description: String = ""
+    var description: String = "",
+    var locationAddress: LocationAddress = LocationAddress()
 ) : Parcelable {
     init {
         if(this.id == "")
