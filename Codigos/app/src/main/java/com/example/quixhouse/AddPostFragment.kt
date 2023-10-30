@@ -129,7 +129,7 @@ class AddPostFragment : Fragment(R.layout.fragment_add_post) {
         savedInstanceState: Bundle?
     ): View {
         if (!Places.isInitialized()) {
-            Places.initialize(requireContext(), "AIzaSyDpW5NKIMTepLNd_H3AmNk9Yzq2hYmDwbk");
+          Places.initialize(requireContext(), BuildConfig.MAPS_API_KEY);
         }
         binding = FragmentAddPostBinding.inflate(inflater, container, false)
         val view = binding.root
