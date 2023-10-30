@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
         android:padding="20dp">
 
         <TextView
@@ -24,15 +25,16 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="Já tem uma conta?" />
+                android:text="Já possui uma conta?" />
 
             <TextView
                 android:id="@+id/linkLogin"
@@ -51,8 +53,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="UserName" />
+            android:layout_marginTop="30dp"
+            android:text="Nome de Usuário" />
 
         <EditText
             android:id="@+id/editUserName"
@@ -60,7 +62,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_edit"
-            android:hint="name"
+            android:hint="Nome"
             android:inputType="text"
             android:padding="10dp" />
 
