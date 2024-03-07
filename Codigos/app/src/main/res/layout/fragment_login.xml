@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:layout_gravity="center"
     tools:context=".auth.LoginFragment">
 
     <LinearLayout
@@ -14,79 +18,99 @@
         android:gravity="center"
         android:padding="20dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="Bem Vindo!!"
+            android:text="Login"
             android:textSize="24dp"
             android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="Não tem uma conta?" />
+                android:src="@drawable/ic_register_hero"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+            </ImageView>
+        </RelativeLayout>
 
-            <TextView
-                android:id="@+id/linkCreateAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginLeft="10dp"
-                android:clickable="true"
-                android:onClick="onLinkButtonClick"
-                android:text="Clique aqui"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/black"
-                android:textStyle="bold|italic" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:text="Email" />-->
 
-        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editEmail"
+                android:layout_marginTop="8dp"
+                android:hint="Examplo@email.com"
+                style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="10dp">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="Password" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editPassword"
+                android:layout_marginTop="8dp"
+                android:hint="Senha"
+                style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="10dp">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Email" />
-
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_edit"
-            android:hint="email@email.com"
-            android:inputType="textEmailAddress"
-            android:padding="10dp" />
+            android:gravity="center"
+            android:text="Novo usuario?" />
 
         <TextView
+            android:id="@+id/linkCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Password" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edit"
-                android:inputType="textPassword"
-                android:padding="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="onLinkButtonClick"
+            android:text="Clique aqui"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
@@ -95,7 +119,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="60dp">
 
         <Button
             android:id="@+id/buttonLogin"
@@ -117,9 +141,26 @@
             android:onClick="onLinkButtonClick"
             android:text="Esqueci minha senha"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/black"
+            android:textColor="@color/register_bk_color"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
+    <View
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="11dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_side_bg"/>
+    <ImageView
+        android:id="@+id/imagemView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_img"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true" />
 
-</LinearLayout>
+</RelativeLayout>

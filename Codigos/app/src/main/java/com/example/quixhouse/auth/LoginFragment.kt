@@ -6,6 +6,7 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -50,10 +51,10 @@ class LoginFragment : Fragment() {
         binding.linkRecoverPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_recoverPasswordFragment)
         }
-
+        binding.imagemView.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment)
+        }
     }
-
-
 
     private fun loginUser(email : String, password : String) {
         if (validateData(email, password)) {
@@ -81,6 +82,9 @@ class LoginFragment : Fragment() {
             false
         }
     }
+
+    //criar uma navigate para o ImageView
+
 
     private fun applyUnderline(textView : TextView, texto : String) {
         // Crie uma SpannableString e aplique o sublinhado

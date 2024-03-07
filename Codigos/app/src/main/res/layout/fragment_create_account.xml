@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,95 +14,134 @@
         android:gravity="center"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Criar Conta"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="Já possui uma conta?" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Cadastro"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_register_hero"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true">
+                </ImageView>
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/linkLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginLeft="10dp"
-                android:clickable="true"
-                android:onClick="onLinkButtonClick"
-                android:text="log in"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/black"
-                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Nome de Usuário" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:text="Nome de Usuário" />-->
 
-        <EditText
-            android:id="@+id/editUserName"
+<!--        <EditText-->
+<!--            android:id="@+id/editUserName"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:background="@drawable/bg_edit"-->
+<!--            android:hint="Nome"-->
+<!--            android:inputType="text"-->
+<!--            android:padding="10dp" />-->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_edit"
-            android:hint="Nome"
-            android:inputType="text"
-            android:padding="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Email" />
+            android:layout_marginTop="60dp">
 
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_edit"
-            android:hint="email@email.com"
-            android:inputType="text"
-            android:padding="10dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editUserName"
+                android:layout_marginTop="8dp"
+                android:hint="Nome"
+                style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Password" />
+            </com.google.android.material.textfield.TextInputEditText>
 
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editEmail"
+                android:layout_marginTop="8dp"
+                android:hint="Examplo@email.com"
+                style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="10dp">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_edit"
-                android:inputType="textPassword"
-                android:padding="10dp" />
+                android:id="@+id/editPassword"
+                android:layout_marginTop="8dp"
+                android:hint="Senha"
+                style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="10dp">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="Possui Conta?" />
+
+        <TextView
+            android:id="@+id/linkLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="onLinkButtonClick"
+            android:text="Clique aqui"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
@@ -111,7 +150,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="60dp">
 
         <Button
             android:id="@+id/buttonCadastro"
@@ -126,4 +165,22 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <View
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="11dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_side_bg_left"/>
+    <ImageView
+        android:id="@+id/imagemView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_img"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true" />
+
+</RelativeLayout>

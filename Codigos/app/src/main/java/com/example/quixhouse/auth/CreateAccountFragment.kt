@@ -49,6 +49,9 @@ class CreateAccountFragment : Fragment() {
             findNavController().navigate(R.id.action_createAccountFragment_to_loginFragment)
         }
 
+        binding.imagemView.setOnClickListener {
+            findNavController().navigate(R.id.action_createAccountFragment_to_loginFragment)
+        }
 
     }
 
