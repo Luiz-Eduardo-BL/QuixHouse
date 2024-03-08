@@ -44,24 +44,8 @@
                 </ImageView>
             </RelativeLayout>
 
-
         </LinearLayout>
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:text="Nome de Usuário" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editUserName"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:background="@drawable/bg_edit"-->
-<!--            android:hint="Nome"-->
-<!--            android:inputType="text"-->
-<!--            android:padding="10dp" />-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editEmail"
                 android:layout_marginTop="8dp"
-                android:hint="Examplo@email.com"
+                android:hint="Exemplo@email.com"
                 style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -143,25 +127,15 @@
             android:textColor="@color/colorAccent"
             android:textStyle="bold|italic" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:padding="60dp">
-
-        <Button
-            android:id="@+id/buttonCadastro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/bg_button"
-            android:text="Cadastrar"
-            app:backgroundTint="@null"
-            android:layout_marginBottom="40dp"
-            />
+            <Button
+                android:id="@+id/buttonCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_button"
+                android:text="Cadastrar"
+                app:backgroundTint="@null"
+                android:layout_marginBottom="40dp"/>
 
     </LinearLayout>
 

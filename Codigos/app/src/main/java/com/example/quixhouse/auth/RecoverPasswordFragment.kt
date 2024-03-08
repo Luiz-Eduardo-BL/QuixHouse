@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.quixhouse.R
 import com.example.quixhouse.databinding.FragmentRecoverPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -36,7 +38,9 @@ class RecoverPasswordFragment : Fragment() {
             val email = binding.editEmail.text.toString().trim()
             recoverAccount(email)
         }
-
+        binding.imagemView.setOnClickListener {
+            findNavController().navigate(R.id.action_recoverPasswordFragment_to_loginFragment)
+        }
     }
 
     private fun recoverAccount(email : String) {
