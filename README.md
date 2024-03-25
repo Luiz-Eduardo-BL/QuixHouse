@@ -56,7 +56,7 @@ Você também pode baixar o arquivo `.bmpr` do Balsamiq clicando [aqui](/Wirefra
 
 Protótipos de alto nível são representações mais detalhadas e próximas do visual final do aplicativo. Eles ajudam a ter uma ideia mais clara do design e da experiência do usuário. Veja abaixo o protótipo de alto nível do QuixHouse:
 
-![Prototipo de Alto Nivel](/Wireframe/PrototipoAltoNivel.png)
+![Prototipo de Alto Nivel](/Wireframe/PrototipoAltoNivelAtualizado.png)
 
 
 ## Como Contribuir
